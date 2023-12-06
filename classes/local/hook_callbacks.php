@@ -14,18 +14,29 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
 
+namespace local_testcourseismodified\local;
+
+use core\hook\backup\get_exclude_course_backup_list;
+
 /**
- * Plugin version and other meta-data are defined here.
+ * The local hook class.
  *
  * @package     local_testcourseismodified
+ * @category    local
  * @copyright   2023 Tomo Tsuyuki <tomotsuyuki@catalyst-au.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+class hook_callbacks {
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->component = 'local_testcourseismodified';
-$plugin->release = '0.1.0';
-$plugin->version = 2023120600;
-$plugin->requires = 2022041900;
-$plugin->maturity = MATURITY_BETA;
+    /**
+     * Add array of event name to exclude to trigger course backup.
+     * @param get_exclude_course_backup_list $hook
+     * @return void
+     */
+    public static function get_exclude_course_backup_list(get_exclude_course_backup_list $hook): void {
+        $hook->add_list([
+            '\local_testcourseismodified\event\test_event_not_modified_one',
+            '\local_testcourseismodified\event\test_event_not_modified_two',
+        ]);
+    }
+}
