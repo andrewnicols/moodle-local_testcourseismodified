@@ -1,8 +1,8 @@
 # Plugin for is_course_modified test #
 
-TODO Describe the plugin shortly here.
+This plugin is for testing for MDL-73926
 
-TODO Provide more detailed description here.
+https://tracker.moodle.org/browse/MDL-73926
 
 ## Installing via uploaded ZIP file ##
 
@@ -16,7 +16,7 @@ TODO Provide more detailed description here.
 
 The plugin can be also installed by putting the contents of this directory to
 
-    {your/moodle/dirroot}/local/testcoursebackupfalse
+    {your/moodle/dirroot}/local/testcourseismodified
 
 Afterwards, log in to your Moodle site as an admin and go to _Site administration >
 Notifications_ to complete the installation.
