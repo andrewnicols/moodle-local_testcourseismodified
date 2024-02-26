@@ -16,11 +16,6 @@
 
 namespace local_testcourseismodified;
 
-defined('MOODLE_INTERNAL') || die();
-
-global $CFG;
-require_once($CFG->dirroot . '/local/testcourseismodified/tests/testable_backup_cron_automated_helper.php');
-
 /**
  * The coursebackup test class.
  *
@@ -29,7 +24,13 @@ require_once($CFG->dirroot . '/local/testcourseismodified/tests/testable_backup_
  * @copyright   2023 Tomo Tsuyuki <tomotsuyuki@catalyst-au.com>
  * @license     https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class courseismodified_test extends \advanced_testcase {
+final class courseismodified_test extends \advanced_testcase {
+    public static function setUpBeforeClass(): void {
+        global $CFG;
+
+        require_once($CFG->dirroot . '/backup/util/helper/backup_cron_helper.class.php');
+        require_once($CFG->dirroot . '/local/testcourseismodified/tests/testable_backup_cron_automated_helper.php');
+    }
 
     /**
      * Function is_course_modified test.
@@ -54,7 +55,7 @@ class courseismodified_test extends \advanced_testcase {
         $this->waitForSecond();
         $event = \local_testcourseismodified\event\test_event_not_modified_one::create([
             'objectid' => $course->id,
-            'context'  => \context_course::instance($course->id),
+            'context'  => \core\context\course::instance($course->id),
             'other'    => [],
         ]);
         $event->trigger();
@@ -62,7 +63,7 @@ class courseismodified_test extends \advanced_testcase {
 
         $event = \local_testcourseismodified\event\test_event_not_modified_two::create([
             'objectid' => $course->id,
-            'context'  => \context_course::instance($course->id),
+            'context'  => \core\context\course::instance($course->id),
             'other'    => [],
         ]);
         $event->trigger();
@@ -70,7 +71,7 @@ class courseismodified_test extends \advanced_testcase {
 
         $event = \local_testcourseismodified\event\test_event_modified_one::create([
             'objectid' => $course->id,
-            'context'  => \context_course::instance($course->id),
+            'context'  => \core\context\course::instance($course->id),
             'other'    => [],
         ]);
         $event->trigger();

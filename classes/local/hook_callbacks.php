@@ -16,8 +16,6 @@
 
 namespace local_testcourseismodified\local;
 
-use core\hook\backup\get_excluded_events;
-
 /**
  * The local hook class.
  *
@@ -30,13 +28,13 @@ class hook_callbacks {
 
     /**
      * Add array of event name to exclude to trigger course backup.
-     * @param get_excluded_events $hook
-     * @return void
+     *
+     * @param \core\hook $hook
      */
-    public static function get_excluded_events(get_excluded_events $hook): void {
-        $hook->add_events([
+    public static function exclude_events(\core_backup\hook\before_course_modified_check $hook): void {
+        $hook->exclude_events(
             '\local_testcourseismodified\event\test_event_not_modified_one',
             '\local_testcourseismodified\event\test_event_not_modified_two',
-        ]);
+        );
     }
 }

@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $callbacks = [
     [
-        'hook' => core\hook\backup\get_excluded_events::class,
-        'callback' => local_testcourseismodified\local\hook_callbacks::class . '::get_excluded_events',
+        'hook' => \core_backup\hook\before_course_modified_check::class,
+        'callback' => local_testcourseismodified\local\hook_callbacks::class . '::exclude_events',
     ],
 ];

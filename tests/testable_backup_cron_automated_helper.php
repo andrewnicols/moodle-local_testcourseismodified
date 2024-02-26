@@ -16,10 +16,6 @@
 
 namespace local_testcourseismodified;
 
-defined('MOODLE_INTERNAL') || die();
-
-require_once($CFG->dirroot . '/backup/util/helper/backup_cron_helper.class.php');
-
 /**
  * Provides access to protected methods we want to explicitly test
  *
